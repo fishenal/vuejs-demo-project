@@ -9,8 +9,8 @@ let router = new VueRouter({
 })
 
 router.map({
-	'/hello': {
-	  component: require('./page/Hello.vue')
+	'/index': {
+	  component: require('./page/Index.vue')
 	},
 	// '/user/:userId': {
 	//   component: require('./components/user/index.vue')
