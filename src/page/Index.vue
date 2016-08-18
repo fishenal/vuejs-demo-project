@@ -49,6 +49,15 @@ export default {
   components: {
     SlideShow
   },
+  ready () {
+    let resource = this.$resource('api{/type}');
+    resource.save({type: 'getBoardList'}, 'hello')
+    .then(function (data) {
+        console.log(data)
+    }, function (error) {
+        console.log(error)
+    })
+  },
   data () {
     return {
       boardList: [

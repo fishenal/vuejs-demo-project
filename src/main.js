@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 Vue.use(VueRouter)
+Vue.use(VueResource)
 
 let router = new VueRouter({
   history: true,
@@ -9,12 +11,15 @@ let router = new VueRouter({
 })
 
 router.map({
-	'/index': {
-	  component: require('./page/Index.vue')
+	'/': {
+	  	component: require('./page/Index.vue')
 	},
-	// '/user/:userId': {
-	//   component: require('./components/user/index.vue')
-	// }
+	'/index': {
+	  	component: require('./page/Index.vue')
+	},
+	'/detail': {
+		component: require('./page/Detail.vue')
+	}
 })
 
 router.start(App, 'app')

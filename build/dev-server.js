@@ -14,8 +14,8 @@ var port = process.env.PORT || config.dev.port
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var mockApp = express()
 var compiler = webpack(webpackConfig)
-
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   stats: {
@@ -55,6 +55,18 @@ app.use(hotMiddleware)
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
+mockApp.use('/api', express.static('./mock'))
+mockApp.all('/api/:id', function (req, res, next) {
+  console.log(__dirname)
+  res.sendfile( __dirname + '../mock/' + req.params.id + '.json');
+})
+mockApp.listen(port + 1, function (err) {
+  if (err) {
+    console.log(err)
+    return
+  }
+  console.log('Listening at http://localhost:' + (port + 1) + '\n')
+})
 
 module.exports = app.listen(port, function (err) {
   if (err) {
