@@ -51,7 +51,7 @@ export default {
   },
   ready () {
     let resource = this.$resource('api{/type}');
-    resource.save({type: 'getBoardList'}, 'hello')
+    resource.get({type: 'getBoardList'}, {hello: 'world'})
     .then(function (data) {
         console.log(data)
     }, function (error) {
