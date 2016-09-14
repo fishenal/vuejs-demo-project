@@ -1,8 +1,9 @@
 <template>
   <div class="index-wrap">
+    <demo></demo>
     <div class="index-left">
       <div class="index-left-block">
-        <h2>全部产品</h2>
+        <h2 @click="toLoadNew">全部产品</h2>
         <h3>游戏类</h3>
         <ul>
           <li v-for="item in productList.game">
@@ -45,18 +46,23 @@
 
 <script>
 import SlideShow from '../components/SlideShow'
+
 export default {
   components: {
-    SlideShow
+    SlideShow,
+    Demo: function (resolve) {
+      require(['../components/Demo'], resolve)
+    }
   },
   ready () {
-    let resource = this.$resource('api{/type}');
-    resource.get({type: 'getBoardList'}, {hello: 'world'})
-    .then(function (data) {
-        console.log(data)
-    }, function (error) {
-        console.log(error)
-    })
+    // let resource = this.$resource('api{/type}');
+    // resource.save({type: 'getBoardList'}, {hello: 'world'})
+    // .then(function (data) {
+    //     console.log(data)
+    // }, function (error) {
+    //     console.log(error)
+    // })
+      // Demo(resolve)
   },
   data () {
     return {
@@ -143,6 +149,11 @@ export default {
           href: 'http://xxx.xxx.com'
         }
       ]
+    }
+  },
+  methods: {
+    toLoadNew: function () {
+      console.log(123)
     }
   }
 }
