@@ -2,7 +2,7 @@
   <div class="slide-show" @mouseover="clearInv" @mouseout="runInv">
     <div class="slide-img">
       <a href="{{ href }}">
-        <img v-show="showSlides" src="{{ src }}" transition="expand"> 
+        <img v-show="showSlides" :src="src" transition="expand"> 
       </a>
     </div>
     <h2>{{ title }}</h2>
