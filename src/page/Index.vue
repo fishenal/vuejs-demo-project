@@ -3,7 +3,7 @@
     <div class="index-left">
       <div class="index-left-block">
         <h2>全部产品</h2>
-        <h3>游戏类</h3>
+        <h3>PC产品</h3>
         <ul>
           <li v-for="item in productList.game">
             <a :href="item.url">{{ item.name }}</a>
@@ -34,7 +34,7 @@
             <h2>{{ item.title }}</h2>
             <p>{{ item.description }}</p>
             <div class="index-board-button">
-              <a class="button">立即购买</a>
+              <a class="button" v-link="'detail'">立即购买</a>
             </div>  
           </div>
         </div>
@@ -85,38 +85,38 @@ export default {
       productList: {
         game: [
           {
-            name: 'starcraft',
+            name: '数据统计',
             url: 'http://starcraft.com'
           },
           {
-            name: 'warcraft',
+            name: '数据预测',
             url: 'http://warcraft.com'
           },
           {
-            name: 'overwatch',
+            name: '流量分析',
             url: 'http://overwatch.com',
             hot: true
           },
           {
-            name: 'hearstone',
+            name: '广告发布',
             url: 'http://hearstone.com'
           }
         ],
         app: [
           {
-            name: 'weixin',
+            name: '91助手',
             url: 'http://weixin.com'
           },
           {
-            name: 'twitter',
+            name: '产品助手',
             url: 'http://twitter.com'
           },
           {
-            name: 'maps',
+            name: '智能地图',
             url: 'http://maps.com'
           },
           {
-            name: 'phone',
+            name: '团队语音',
             url: 'http://phone.com'
           }
         ]
@@ -173,7 +173,7 @@ export default {
   margin-bottom: 20px;
 }
 .index-left-block h2 {
-  background: #ed4857;
+  background: #4fc08d;
   color: #fff;
   padding: 10px 15px;
   margin-bottom: 20px;

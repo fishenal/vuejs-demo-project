@@ -1,7 +1,7 @@
 <template>
   <div class="app-head">
     <div class="app-head-inner">
-      <h2 class="head-logo">
+      <h2 class="head-logo" v-link="'/'">
         <img src="./assets/logo.png">
       </h2>
       <div class="head-nav">
@@ -89,7 +89,7 @@ body {
   background: #f0f2f5;
   font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   font-size: 14px;
-  color: #888;
+  color: #444;
 }
 .app-head {
   background: #363636;
@@ -129,6 +129,7 @@ body {
   line-height: 80px;
   background: #e3e4e8;
   clear: both;
+  margin-top: 30px;
 }
 .container {
   width: 1200px;
@@ -140,13 +141,13 @@ body {
   background: #ddd;
 }
 .button {
-  background: #f39720;
+  background: #4fc08d;
   color: #fff;
   display: inline-block;
-  padding: 5px 15px;
+  padding: 10px 20px;
   cursor: pointer;
 }
 .button:hover {
-  background: #fbbe6e;
+  background: #4fc08d;
 }
 </style>
