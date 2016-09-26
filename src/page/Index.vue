@@ -1,6 +1,5 @@
 <template>
   <div class="index-wrap">
-    <demo></demo>
     <div class="index-left">
       <div class="index-left-block">
         <h2>全部产品</h2>
@@ -28,7 +27,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides.once="slides"></slide-show>
+      <!-- <slide-show :slides.once="slides"></slide-show> -->
       <div class="index-board-list">
         <div class="index-board-item" v-for="item in boardList" :class="['index-board-' + $index, {'line-last': ($index + 1) % 2 === 0}]">
           <div class="index-board-item-inner" >
@@ -45,14 +44,11 @@
 </template>
 
 <script>
-import SlideShow from '../components/SlideShow'
+// import SlideShow from '../components/SlideShow'
 
 export default {
   components: {
-    SlideShow,
-    Demo: function (resolve) {
-      require(['../components/Demo'], resolve)
-    }
+    // SlideShow
   },
   ready () {
     // let resource = this.$resource('api{/type}');

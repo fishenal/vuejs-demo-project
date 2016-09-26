@@ -1,33 +1,60 @@
 <template>
-  <div class="app-head">
-    <div class="app-head-inner">
-      <h2 class="head-logo" v-link="'/'">
-        <img src="./assets/logo.png">
-      </h2>
-      <div class="head-nav">
-        <ul class="nav-list">
-          <li>登录</li>
-          <li class="nav-pile">|</li>
-          <li>注册</li>
-          <li class="nav-pile">|</li>
-          <li>关于</li>
-        </ul>
-      </div>  
+  <div>
+    <div class="app-head">
+      <div class="app-head-inner">
+        <h2 class="head-logo" v-link="'/'">
+          <img src="./assets/logo.png">
+        </h2>
+        <div class="head-nav">
+          <ul class="nav-list">
+            <li @click="showDialog('isShowLogin')">登录</li>
+            <li class="nav-pile">|</li>
+            <li @click="showDialog('isShowReg')">注册</li>
+            <li class="nav-pile">|</li>
+            <li @click="showDialog('isShowAbout')">关于</li>
+          </ul>
+        </div>  
+      </div>
     </div>
-  </div>
-  <div class="container">
-    <router-view transition="expand" transition-mode="out-in" keep-alive></router-view>  
-  </div> 
-  </div>
-  <div class="app-foot">
-    <p>© 2016 fishenal MIT</p>
+    <div class="container">
+      <router-view transition="expand" transition-mode="out-in" keep-alive></router-view>  
+    </div>
+    <div class="app-foot">
+      <p>© 2016 fishenal MIT</p>
+    </div>
+    <dialog :is-show="isShowAbout" @on-close="hideDialog('isShowAbout')">
+      <p>本报告在调研数据的基础上，采用定性与定量相结合的方式深入分析了专车市场发展的驱动因素与阻碍因素、专车市场背后的产业格局、专车企业的竞争格局、用户对专车市场的依赖程度、专车对其他交通工具运力的补充效应等，通过这五个章节的研究反映专车市场的发展态势和面临的问题。报告力求客观、深入、准确地反映中国专车市场发展情况，为政府、企事业单位和社会各界提供决策依据。 </p>
+    </dialog>
+    <dialog :is-show="isShowLogin" @on-close="hideDialog('isShowLogin')">
+      <login-form></login-form>
+    </dialog>
   </div>
 </template>
 
 <script>
-
+import Dialog from './components/Dialog'
+// import LoginForm from './components/LoginForm'
 export default {
   components: {
+    Dialog,
+    LoginForm: function (resolve) {
+      require(['./components/LoginForm'], revolve)
+    }
+  },
+  data: function () {
+    return {
+      isShowAbout: false,
+      isShowLogin: false,
+      isShowReg: false
+    }
+  },
+  methods: {
+    showDialog (param) {
+      this[param] = true
+    },
+    hideDialog (param) {
+      this[param] = false
+    }
   }
 }
 </script>
