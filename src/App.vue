@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="container">
-      <router-view transition="expand" transition-mode="out-in" keep-alive></router-view>  
+      <router-view transition="fade" transition-mode="out-in" keep-alive></router-view>  
     </div>
     <div class="app-foot">
       <p>© 2016 fishenal MIT</p>
@@ -38,7 +38,7 @@ export default {
   components: {
     Dialog,
     LoginForm: function (resolve) {
-      require(['./components/LoginForm'], revolve)
+      require(['./parts/LoginForm'], resolve)
     }
   },
   data: function () {
@@ -118,6 +118,34 @@ body {
   font-size: 14px;
   color: #444;
 }
+/* 必需 */
+.fade-transition {
+  transition: all .3s ease;
+  opacity: 1;
+  overflow: hidden;
+}
+
+/* .expand-enter 定义进入的开始状态 */
+/* .expand-leave 定义离开的结束状态 */
+.fade-enter, .fade-leave {
+  opacity: 0;
+}
+/* 必需 */
+.expand-transition {
+  transition: all .3s ease;
+  height: 30px;
+  padding: 10px;
+  background-color: #eee;
+  overflow: hidden;
+}
+
+/* .expand-enter 定义进入的开始状态 */
+/* .expand-leave 定义离开的结束状态 */
+.expand-enter, .expand-leave {
+  height: 0;
+  padding: 0 10px;
+  opacity: 0;
+}
 .app-head {
   background: #363636;
   color: #b2b2b2;
@@ -176,5 +204,30 @@ body {
 }
 .button:hover {
   background: #4fc08d;
+}
+.g-form {
+
+}
+.g-form-line {
+  padding: 15px 0;
+}
+.g-form-label {
+  width: 100px;
+  font-size: 16px;
+  display: inline-block;
+}
+.g-form-input {
+  display: inline-block;
+}
+.g-form-input input {
+  height: 30px;
+  width: 200px;
+  line-height: 30px;
+  vertical-align: middle;
+  padding: 0 10px;
+  border: 1px solid #ccc;
+}
+.g-form-btn {
+  padding-left: 100px;
 }
 </style>

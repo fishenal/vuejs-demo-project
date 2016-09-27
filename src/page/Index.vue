@@ -3,7 +3,7 @@
     <div class="index-left">
       <div class="index-left-block">
         <h2>全部产品</h2>
-        <h3>PC产品</h3>
+        <h3 v-style="style">PC产品</h3>
         <ul>
           <li v-for="item in productList.game">
             <a :href="item.url">{{ item.name }}</a>
@@ -62,6 +62,10 @@ export default {
   },
   data () {
     return {
+      style: {
+        'color': 'red',
+        'font-size': '20px'
+      },
       boardList: [
         {
           title: '开放产品',

@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog-wrap" v-if="isShow">
+  <div class="dialog-wrap" v-if="isShow" transition="expand">
     <div class="dialog-cover"></div>
     <div class="dialog-content">
       <p class="dialog-close" @click="closeMyself">x</p>

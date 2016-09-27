@@ -8,7 +8,7 @@
     <h2>{{ title }}</h2>
     <ul class="slide-pages">
       <li @click="prev">&lt;</li>
-      <li v-for="(index) in slides" @click="update($index)">
+      <li v-for="item in slides" @click="update($index)">
         <span :class="{'on': $index === nowIndex}">{{ $index + 1 }}</span>
       </li>
       <li @click="next">&gt;</li>
@@ -115,16 +115,5 @@ export default {
 }
 .slide-pages li .on {
   text-decoration: underline;
-}
-/* 必需 */
-.expand-transition {
-  transition: all .3s ease;
-  opacity: 1;
-}
-
-/* .expand-enter 定义进入的开始状态 */
-/* .expand-leave 定义离开的结束状态 */
-.expand-enter, .expand-leave {
-  opacity: 0.5;
 }
 </style>
