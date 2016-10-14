@@ -2,9 +2,9 @@
   <div>
     <div class="app-head">
       <div class="app-head-inner">
-        <h2 class="head-logo" v-link="'/'">
+        <router-link :to="{path: '/'}" class="head-logo">
           <img src="./assets/logo.png">
-        </h2>
+        </router-link>
         <div class="head-nav">
           <ul class="nav-list">
             <li @click="showDialog('isShowLogin')">登录</li>
@@ -17,29 +17,29 @@
       </div>
     </div>
     <div class="container">
-      <router-view transition="fade" transition-mode="out-in" keep-alive></router-view>  
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
     <div class="app-foot">
       <p>© 2016 fishenal MIT</p>
     </div>
-    <dialog :is-show="isShowAbout" @on-close="hideDialog('isShowAbout')">
+    <this-dialog :is-show="isShowAbout" @on-close="hideDialog('isShowAbout')">
       <p>本报告在调研数据的基础上，采用定性与定量相结合的方式深入分析了专车市场发展的驱动因素与阻碍因素、专车市场背后的产业格局、专车企业的竞争格局、用户对专车市场的依赖程度、专车对其他交通工具运力的补充效应等，通过这五个章节的研究反映专车市场的发展态势和面临的问题。报告力求客观、深入、准确地反映中国专车市场发展情况，为政府、企事业单位和社会各界提供决策依据。 </p>
-    </dialog>
-    <dialog :is-show="isShowLogin" @on-close="hideDialog('isShowLogin')">
+    </this-dialog>
+    <this-dialog :is-show="isShowLogin" @on-close="hideDialog('isShowLogin')">
       <login-form></login-form>
-    </dialog>
+    </this-dialog>
   </div>
 </template>
 
 <script>
-import Dialog from './components/Dialog'
-// import LoginForm from './components/LoginForm'
+import ThisDialog from './components/Dialog'
+import LoginForm from './parts/LoginForm'
 export default {
   components: {
-    Dialog,
-    LoginForm: function (resolve) {
-      require(['./parts/LoginForm'], resolve)
-    }
+    ThisDialog,
+    LoginForm
   },
   data: function () {
     return {
@@ -117,34 +117,6 @@ body {
   font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
   font-size: 14px;
   color: #444;
-}
-/* 必需 */
-.fade-transition {
-  transition: all .3s ease;
-  opacity: 1;
-  overflow: hidden;
-}
-
-/* .expand-enter 定义进入的开始状态 */
-/* .expand-leave 定义离开的结束状态 */
-.fade-enter, .fade-leave {
-  opacity: 0;
-}
-/* 必需 */
-.expand-transition {
-  transition: all .3s ease;
-  height: 30px;
-  padding: 10px;
-  background-color: #eee;
-  overflow: hidden;
-}
-
-/* .expand-enter 定义进入的开始状态 */
-/* .expand-leave 定义离开的结束状态 */
-.expand-enter, .expand-leave {
-  height: 0;
-  padding: 0 10px;
-  opacity: 0;
 }
 .app-head {
   background: #363636;

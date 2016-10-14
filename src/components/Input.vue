@@ -1,6 +1,6 @@
 <template>
   <div>
-      <input :type="type" v-model="cval" :placeholder="placeholder">
+      <input type="text" v-model="cval" :placeholder="placeholder">
       <span class="error">{{ errorText }}</span>
   </div>
 </template>
@@ -8,15 +8,15 @@
 <script>
 export default {
   props: {
-    type: 'string',
-    placeholder: 'string',
-    cval: ['string', 'object'],
-    regMap: 'object',
-    okStatus: 'boolean'
+    placeholder: String,
+    cval: [String, Object],
+    regMap: Object,
+    okStatus: Boolean
   },
   data () {
     return {
-      errorText: null
+      errorText: null,
+      cval: null
     }
   },
   watch: {

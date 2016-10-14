@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides.once="slides"></slide-show>  
+      <slide-show :slides="slides"></slide-show>  
     </div>
   </div>
 </template>

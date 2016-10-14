@@ -1,15 +1,15 @@
 <template>
   <div class="slide-show" @mouseover="clearInv" @mouseout="runInv">
     <div class="slide-img">
-      <a href="{{ href }}">
-        <img v-show="showSlides" :src="src" transition="expand"> 
+      <a :href="href">
+        <img v-show="showSlides" :src="src"> 
       </a>
     </div>
     <h2>{{ title }}</h2>
     <ul class="slide-pages">
       <li @click="prev">&lt;</li>
-      <li v-for="item in slides" @click="update($index)">
-        <span :class="{'on': $index === nowIndex}">{{ $index + 1 }}</span>
+      <li v-for="(item, index) in slides" @click="update(index)">
+        <span :class="{'on': index === nowIndex}">{{ index + 1 }}</span>
       </li>
       <li @click="next">&gt;</li>
     </ul>
@@ -67,7 +67,7 @@ export default {
       }.bind(this), 3000)
     }
   },
-  ready: function () {
+  mounted () {
     this.update(0);
     this.runInv();
   },

@@ -4,14 +4,14 @@
       <div class="g-form-line">
         <span class="g-form-label">用户名：</span>
         <div class="g-form-input">
-          <c-input type="text" :cval.sync="username" :ok-status.sync="usernameOk" placeholder="请输入用户名" :reg-map="userRegMap" >
+          <c-input type="text" :cval="username" :ok-status="usernameOk" placeholder="请输入用户名" :reg-map="userRegMap" >
         </div>
         
       </div>
       <div class="g-form-line">
         <span class="g-form-label">密码：</span>
         <div class="g-form-input">
-          <c-input type="password" :cval.sync="password" :ok-status.sync="passwordOk" placeholder="请输入密码" :reg-map="pasRegMap">
+          <c-input type="password" :cval="password" :ok-status="passwordOk" placeholder="请输入密码" :reg-map="pasRegMap">
         </div>
       </div>
       <div class="g-form-line">

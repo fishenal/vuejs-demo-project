@@ -3,7 +3,7 @@
     <div class="index-left">
       <div class="index-left-block">
         <h2>全部产品</h2>
-        <h3 v-style="style">PC产品</h3>
+        <h3>PC产品</h3>
         <ul>
           <li v-for="item in productList.game">
             <a :href="item.url">{{ item.name }}</a>
@@ -27,14 +27,14 @@
       </div>
     </div>
     <div class="index-right">
-      <!-- <slide-show :slides.once="slides"></slide-show> -->
+      <slide-show :slides="slides"></slide-show>
       <div class="index-board-list">
-        <div class="index-board-item" v-for="item in boardList" :class="['index-board-' + $index, {'line-last': ($index + 1) % 2 === 0}]">
+        <div class="index-board-item" v-for="(item, index) in boardList" :class="['index-board-' + index, {'line-last': (index + 1) % 2 === 0}]">
           <div class="index-board-item-inner" >
             <h2>{{ item.title }}</h2>
             <p>{{ item.description }}</p>
             <div class="index-board-button">
-              <a class="button" v-link="'detail'">立即购买</a>
+              <router-link class="button" :to="{ path: 'detail' }">立即购买</router-link>
             </div>  
           </div>
         </div>
@@ -44,28 +44,14 @@
 </template>
 
 <script>
-// import SlideShow from '../components/SlideShow'
+import SlideShow from '../parts/SlideShow'
 
 export default {
   components: {
-    // SlideShow
-  },
-  ready () {
-    // let resource = this.$resource('api{/type}');
-    // resource.save({type: 'getBoardList'}, {hello: 'world'})
-    // .then(function (data) {
-    //     console.log(data)
-    // }, function (error) {
-    //     console.log(error)
-    // })
-      // Demo(resolve)
+    SlideShow
   },
   data () {
     return {
-      style: {
-        'color': 'red',
-        'font-size': '20px'
-      },
       boardList: [
         {
           title: '开放产品',

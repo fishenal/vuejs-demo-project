@@ -4,15 +4,17 @@
       <div class="product-board">
         <img :src="imgMap[$route.path]">
         <ul>
-          <li v-for="item in products" v-link="{path: item.path, activeClass: 'active'}">
+          <router-link v-for="item in products" :to="{ path: item.path }" tag="li" active-class="active">
             {{ item.name }}
-          </li>
+          </router-link>
         </ul>
       </div>
       
     </div>
     <div class="detail-right">
-      <router-view transition="fade" transition-mode="out-in" keep-alive></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -25,22 +27,22 @@ export default {
       products: [
         {
           name: '数据统计',
-          path: '/detail/count',
+          path: 'count',
           active: false
         },
         {
           name: '数据预测',
-          path: '/detail/forecast',
+          path: 'forecast',
           active: false
         },
         {
           name: '流量分析',
-          path: '/detail/analysis',
+          path: 'analysis',
           active: false
         },
         {
           name: '广告发布',
-          path: '/detail/publish',
+          path: 'publish',
           active: false
         }
       ],
