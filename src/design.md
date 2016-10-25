@@ -33,3 +33,34 @@ clearInv: function () {}
 
 runInv: function () {}
 ```
+
+
+
+#Component Dialog:
+
+##props:
+```
+isShow: false
+```
+
+##event:
+```
+'on-close'
+```
+
+
+
+#Component CustomInput:
+
+##props:
+```
+placeholder: '',
+cval: '',
+regMap: {},
+okStatus: false
+```
+
+##data:
+```
+errorText: ''
+```
