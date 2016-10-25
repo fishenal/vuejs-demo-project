@@ -2,9 +2,19 @@
 
 ##data:
 
+```
+isShow: true,
+nowIndex: 0
+```
+
+##computed
+```
+nextIndex,
+prevIndex
+```
+
 ##props:
 ```
-nowIndex: 0
 slides: [
   {
     title: 'xxx',
@@ -17,13 +27,65 @@ slides: [
 
 ##methods:
 ```
-goto: function (index) {}
-
-prev: function () {}
-
-next: function () {}
+goto: function (index) {} // prev next
 
 clearInv: function () {}
 
 runInv: function () {}
+```
+
+
+
+#Component Dialog:
+
+##props:
+```
+isShow: false
+```
+
+##event:
+```
+'on-close'
+```
+
+
+
+#Component CustomInput:
+
+##props:
+```
+placeholder: '',
+cval: '',
+regMap: {},
+okStatus: false
+```
+
+##data:
+```
+errorText: ''
+```
+
+
+#Component LoginForm:
+
+##data:
+```
+user: {
+  model: '',
+  regMap: {},
+  statusOk: false
+}
+pass: {
+}
+error: ''
+```
+
+##methods:
+```
+onLogin () {}
+```
+
+##event:
+```
+'on-success', 'on-error'
 ```
