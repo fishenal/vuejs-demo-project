@@ -64,3 +64,28 @@ okStatus: false
 ```
 errorText: ''
 ```
+
+
+#Component LoginForm:
+
+##data:
+```
+user: {
+  model: '',
+  regMap: {},
+  statusOk: false
+}
+pass: {
+}
+error: ''
+```
+
+##methods:
+```
+onLogin () {}
+```
+
+##event:
+```
+'on-success', 'on-error'
+```
