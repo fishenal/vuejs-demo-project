@@ -1,21 +1,24 @@
 <template>
   <div>
-    <transition name="expand">
-      <div class="dialog-wrap" v-if="isShow">
-        <div class="dialog-cover"></div>
-        <div class="dialog-content">
-          <p class="dialog-close" @click="closeMyself">x</p>
-          <slot>empty</slot>  
-        </div>
+      <div class="dialog-wrap">
+        <div class="dialog-cover" v-if="isShow" @click="closeMyself"></div>
+        <transition name="drop">
+          <div class="dialog-content" v-if="isShow">
+            <p class="dialog-close" @click="closeMyself">x</p>
+            <slot>empty</slot>  
+          </div>
+        </transition>
       </div>
-    </transition>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    isShow: Boolean
+    isShow: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -32,6 +35,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.drop-enter-active {
+  transition: all .5s ease;
+}
+.drop-leave-active {
+  transition: all .3s ease;
+}
+.drop-enter {
+  transform: translateY(-500px);
+}
+.drop-leave-active {
+  transform: translateY(-500px);
+}
+
 .dialog-wrap {
   position: fixed;
   width: 100%;

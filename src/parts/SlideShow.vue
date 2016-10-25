@@ -82,16 +82,14 @@ export default {
 </script>
 
 <style scoped>
-.slide-trans-enter-active, .slide-trans-leave-active {
+.slide-trans-enter-active {
   transition: all .5s;
 }
 .slide-trans-enter {
   transform: translateX(900px);
 }
-.slide-trans-old-enter-active, .slide-trans-old-leave-active {
-  transition: all .5s;
-}
 .slide-trans-old-leave-active {
+  transition: all .5s;
   transform: translateX(-900px);
 }
 .slide-show {

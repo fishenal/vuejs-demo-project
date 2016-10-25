@@ -1,6 +1,7 @@
 <template>
   <div>
-      <input type="text" v-model="cval" :placeholder="placeholder">
+      <input v-if="type==='password'" type="password" v-model.trim="theVal" :placeholder="placeholder">
+      <input v-if="type==='text'" type="text" v-model.trim="theVal" :placeholder="placeholder">
       <span class="error">{{ errorText }}</span>
   </div>
 </template>
@@ -11,26 +12,30 @@ export default {
     placeholder: String,
     cval: [String, Object],
     regMap: Object,
-    okStatus: Boolean
+    okStatus: Boolean,
+    type: String
   },
-  data () {
-    return {
-      errorText: null,
-      cval: null
-    }
-  },
-  watch: {
-    cval () {
-      this.errorText = ''
+  computed: {
+    theVal () {
+      return this.cval
+    },
+    errorText () {
+      let errorText = ''
       for (let key in this.regMap) {
         let re = new RegExp(key)
-        let errorText = this.regMap[key]
-        if(!re.test(this.cval)) {
-          this.errorText = errorText
+        let errText = this.regMap[key]
+        if(!re.test(this.theVal)) {
+          errorText = errText
           break
         }
       }
-      this.okStatus = this.errorText === ''
+      if (errorText === '') {
+        this.$emit('get-status', true)
+      }
+      else {
+        this.$emit('get-status', false)
+      }
+      return errorText
     }
   }
 }
