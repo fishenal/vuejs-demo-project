@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides"></slide-show>
+      <slide-show :slides="slides" inv='3000'></slide-show>
       <div class="index-board-list">
         <div class="index-board-item" v-for="(item, index) in boardList" :class="['index-board-' + index, {'line-last': (index + 1) % 2 === 0}]">
           <div class="index-board-item-inner" >

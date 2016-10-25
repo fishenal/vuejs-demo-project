@@ -1,17 +1,23 @@
 <template>
   <div class="slide-show" @mouseover="clearInv" @mouseout="runInv">
+
     <div class="slide-img">
-      <a :href="href">
-        <img v-show="showSlides" :src="src"> 
+      <a :href="slides[nowIndex].href">
+        <transition name="slide-trans">
+          <img v-if="isShow" :src="slides[nowIndex].src">
+        </transition>
+        <transition name="slide-trans-old">
+          <img v-if="!isShow" :src="slides[nowIndex].src">
+        </transition>
       </a>
     </div>
-    <h2>{{ title }}</h2>
+    <h2>{{ slides[nowIndex].title }}</h2>
     <ul class="slide-pages">
-      <li @click="prev">&lt;</li>
-      <li v-for="(item, index) in slides" @click="update(index)">
+      <li @click="goto(prevIndex)">&lt;</li>
+      <li v-for="(item, index) in slides" @click="goto(index)">
         <span :class="{'on': index === nowIndex}">{{ index + 1 }}</span>
       </li>
-      <li @click="next">&gt;</li>
+      <li @click="goto(nextIndex)">&gt;</li>
     </ul>
   </div>
 </template>
@@ -20,74 +26,85 @@
 export default {
   data () {
     return {
-      href: 'http:www.123.com',
-      src: '',
-      title: 'xxxxxxxxx',
-      nowIndex: null,
-      showSlides: true
+      isShow: true,
+      nowIndex: 0
+    }
+  },
+  computed: {
+    nextIndex () {
+      if (this.nowIndex === this.slides.length - 1) {
+        return  0
+      }
+      else {
+        return this.nowIndex + 1
+      }
+    },
+    prevIndex () {
+      if (this.nowIndex === 0) {
+        return this.slides.length - 1
+      }
+      else {
+        return this.nowIndex - 1
+      }
+    }
+  },
+  props: {
+    'slides': {
+      type: Array,
+      default: []
+    },
+    'inv': {
+      type: Number,
+      default: 1000
     }
   },
   methods: {
-    update: function (index) {
-      this.showSlides = false
-      this.nowIndex = index
-      this.href = this.slides[index].href
-      this.src = this.slides[index].src
-      this.title = this.slides[index].title
-      setTimeout(function () {
-        this.showSlides = true
-      }.bind(this), 300)
-    },
-    prev: function () {
-      let prevIndex
-      if (this.nowIndex === 0) {
-        prevIndex = this.slides.length - 1
-      }
-      else {
-        prevIndex = this.nowIndex - 1
-      }
-      this.update(prevIndex)
-    },
-    next: function () {
-      let nextIndex
-      if (this.nowIndex === this.slides.length - 1) {
-        nextIndex = 0
-      }
-      else {
-        nextIndex = this.nowIndex + 1
-      }
-      this.update(nextIndex)
+    goto: function (index) {
+      this.isShow = false
+      setTimeout(() => {
+        this.isShow = true
+        this.nowIndex = index
+      }, 10)
     },
     clearInv: function () {
       clearInterval(this.intId)
     },
     runInv: function () {
-      this.intId = setInterval(function () {
-        this.next()
-      }.bind(this), 3000)
+      this.intId = setInterval(() => {
+        this.goto(this.nextIndex)
+      }, this.inv)
     }
   },
   mounted () {
-    this.update(0);
-    this.runInv();
-  },
-  props: {
-    slides: Array
+    this.runInv()
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.slide-trans-enter-active, .slide-trans-leave-active {
+  transition: all .5s;
+}
+.slide-trans-enter {
+  transform: translateX(900px);
+}
+.slide-trans-old-enter-active, .slide-trans-old-leave-active {
+  transition: all .5s;
+}
+.slide-trans-old-leave-active {
+  transform: translateX(-900px);
+}
 .slide-show {
   position: relative;
   margin: 15px 15px 15px 0;
   width: 900px;
+  height: 500px;
+  overflow: hidden;
 }
 .slide-show h2 {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 500px;
   color: #fff;
   background: #000;
   opacity: .5;
@@ -101,6 +118,8 @@ export default {
 }
 .slide-img img {
   width: 100%;
+  position: absolute;
+  top: 0;
 }
 .slide-pages {
   position: absolute;
