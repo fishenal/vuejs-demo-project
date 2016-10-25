@@ -2,9 +2,19 @@
 
 ##data:
 
+```
+isShow: true,
+nowIndex: 0
+```
+
+##computed
+```
+nextIndex,
+prevIndex
+```
+
 ##props:
 ```
-nowIndex: 0
 slides: [
   {
     title: 'xxx',
@@ -17,11 +27,7 @@ slides: [
 
 ##methods:
 ```
-goto: function (index) {}
-
-prev: function () {}
-
-next: function () {}
+goto: function (index) {} // prev next
 
 clearInv: function () {}
 
