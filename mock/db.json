@@ -21,7 +21,5 @@
       "saleout": false
     }
   ],
-  "getUser": {
-    "username": "yudonggong"
-  }
+  "getUser": {}
 }

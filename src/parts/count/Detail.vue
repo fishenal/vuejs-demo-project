@@ -258,56 +258,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.sales-board {
-  background: #fff;
-}
-.sales-board-form {
 
-}
-.sales-board-intro h2 {
-  font-size: 20px;
-  padding: 20px;
-}
-.sales-board-intro p {
-  background: #f7fcff;
-  padding: 10px 20px;
-  color: #999;
-}
-.sales-board-form {
-  padding: 30px 20px;
-  font-size: 14px;
-}
-.sales-board-line {
-  overflow: hidden;
-  clear: both;
-  padding-bottom: 20px;
-}
-.sales-board-line-left {
-    float: left;
-    width: 100px;
-}
-.sales-board-line-right {
-    float: left;
-    width: 75%;
-}
-.sales-board-des {
-  border-top: 20px solid #f0f2f5;
-  padding: 15px 20px;
-}
-.sales-board-des h2 {
-  font-size: 20px;
-  padding-bottom: 15px;
-}
-.sales-board-table {
-  width: 100%;
-  margin-top: 20px;
-}
-.sales-board-table th {
-  background: #4fc08d;
-  color: #fff;
-}
-.sales-board-table td {
-    border: 1px solid #f0f2f5;
-    padding: 15px;
-}
 </style>

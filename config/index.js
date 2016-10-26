@@ -21,6 +21,7 @@ module.exports = {
     port: 8888,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    apiDbPath:'/db.json',
     proxyTable: {
         '/api/': 'http://localhost:8889/'
     },

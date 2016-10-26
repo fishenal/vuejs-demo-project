@@ -2,7 +2,7 @@
   <div class="sales-board">
       <div class="sales-board-intro">
         <h2>广告发布</h2>
-        <p>历史资料、科学实验、检验、统计等所获得的和用于科学研究、技术设计、查证、决策等的数值加以统计为解决方案做前期准备。</p>
+        <p>广告活动按照广告计划执行，到完成广告创作并形成广告作品之后，经过广告主的最后审核同意，即可送到预定的媒介发布刊播。这项工作一般由媒介部门的有关专业人员负责，他们的任务就是专门负责与有关媒介单位接洽，安排有关广告的发播事宜，并对发播质量实施监督。</p>
       </div>
       <div class="sales-board-form">
           <div class="sales-board-line">
@@ -56,7 +56,7 @@
       </div>
       <div class="sales-board-des">
         <h2>产品说明</h2>
-        <p>历史资料、科学实验、检验、统计等所获得的和用于科学研究、技术设计、查证、决策等的数值加以统计为解决方案做前期准备。</p>
+        <p>广告活动按照广告计划执行，到完成广告创作并形成广告作品之后，经过广告主的最后审核同意，即可送到预定的媒介发布刊播。这项工作一般由媒介部门的有关专业人员负责，他们的任务就是专门负责与有关媒介单位接洽，安排有关广告的发播事宜，并对发播质量实施监督。</p>
 
         <table class="sales-board-table">
           <tbody>
@@ -257,57 +257,6 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.sales-board {
-  background: #fff;
-}
-.sales-board-form {
+<style>
 
-}
-.sales-board-intro h2 {
-  font-size: 20px;
-  padding: 20px;
-}
-.sales-board-intro p {
-  background: #f7fcff;
-  padding: 10px 20px;
-  color: #999;
-}
-.sales-board-form {
-  padding: 30px 20px;
-  font-size: 14px;
-}
-.sales-board-line {
-  overflow: hidden;
-  clear: both;
-  padding-bottom: 20px;
-}
-.sales-board-line-left {
-    float: left;
-    width: 100px;
-}
-.sales-board-line-right {
-    float: left;
-    width: 75%;
-}
-.sales-board-des {
-  border-top: 20px solid #f0f2f5;
-  padding: 15px 20px;
-}
-.sales-board-des h2 {
-  font-size: 20px;
-  padding-bottom: 15px;
-}
-.sales-board-table {
-  width: 100%;
-  margin-top: 20px;
-}
-.sales-board-table th {
-  background: #4fc08d;
-  color: #fff;
-}
-.sales-board-table td {
-    border: 1px solid #f0f2f5;
-    padding: 15px;
-}
 </style>
