@@ -126,11 +126,11 @@ export default {
   padding-bottom: 20px;
 }
 .sales-board-line-left {
-    float: left;
+    display: inline-block;
     width: 100px;
 }
 .sales-board-line-right {
-    float: left;
+    display: inline-block;
     width: 75%;
 }
 .sales-board-des {

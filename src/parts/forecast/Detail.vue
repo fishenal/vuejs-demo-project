@@ -10,23 +10,15 @@
                   购买数量：
               </div>
               <div class="sales-board-line-right">
-                  <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                  </select>
+                  <v-counter :max="100" :min="20"></v-counter>
               </div>
           </div>
           <div class="sales-board-line">
               <div class="sales-board-line-left">
-                  产品类型：
+                  媒介：
               </div>
               <div class="sales-board-line-right">
-                  <select>
-                    <option>入门版</option>
-                    <option>中级版</option>
-                    <option>高级版</option>
-                  </select>
+                  <v-mul-chooser :selections="versionList"></v-mul-chooser>
               </div>
           </div>
           <div class="sales-board-line">
@@ -34,7 +26,7 @@
                   有效时间：
               </div>
               <div class="sales-board-line-right">
-                  半年
+                  一年
               </div>
           </div>
           <div class="sales-board-line">
@@ -66,7 +58,35 @@
 </template>
 
 <script>
+import VCounter from '../../components/counter'
+import VMulChooser from '../../components/multiply-chooser'
 export default {
+  components: {
+    VCounter,
+    VMulChooser
+  },
+  data () {
+    return {
+      versionList: [
+        {
+          label: '纸质报告',
+          value: 0
+        },
+        {
+          label: 'pdf',
+          value: 1
+        },
+        {
+          label: '页面报告',
+          value: 2
+        },
+        {
+          label: '邮件',
+          value: 3
+        }
+      ]
+    }
+  }
 }
 </script>
 

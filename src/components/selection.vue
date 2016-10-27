@@ -36,12 +36,12 @@ export default {
     chosenSelection (index) {
       this.nowIndex = index
       this.isDrop = false
+      this.$emit('on-change', this.nowIndex)
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .selection-component {
   position: relative;
@@ -55,6 +55,7 @@ export default {
   cursor: pointer;
   height: 25px;
   line-height: 25px;
+  border-radius: 3px;
 }
 .selection-show .arrow {
   display: inline-block;
@@ -74,8 +75,10 @@ export default {
   left: 0;
   top: 25px;
   width: 100%;
+  background: #fff;
   border-top: 1px solid #e3e3e3;
   border-bottom: 1px solid #e3e3e3;
+  z-index: 5;
 }
 .selection-list li {
   padding: 5px 15px 5px 10px;

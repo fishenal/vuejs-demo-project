@@ -7,26 +7,18 @@
       <div class="sales-board-form">
           <div class="sales-board-line">
               <div class="sales-board-line-left">
-                  购买数量：
+                  产品类型：
               </div>
               <div class="sales-board-line-right">
-                  <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                  </select>
+                  <v-chooser :selections="buyTypes"></v-chooser>
               </div>
           </div>
           <div class="sales-board-line">
               <div class="sales-board-line-left">
-                  产品类型：
+                  适用地区：
               </div>
               <div class="sales-board-line-right">
-                  <select>
-                    <option>入门版</option>
-                    <option>中级版</option>
-                    <option>高级版</option>
-                  </select>
+                  <v-selection :selections="districts"></v-selection>
               </div>
           </div>
           <div class="sales-board-line">
@@ -252,7 +244,57 @@
 </template>
 
 <script>
+import VSelection from '../../components/selection'
+import VChooser from '../../components/chooser'
 export default {
+  components: {
+    VChooser,
+    VSelection
+  },
+  data () {
+    return {
+      buyTypes: [
+        {
+          label: '红色版',
+          value: 0
+        },
+        {
+          label: '绿色版',
+          value: 1
+        },
+        {
+          label: '紫色版',
+          value: 2
+        }
+      ],
+      districts: [
+        {
+          label: '北京',
+          value: 0
+        },
+        {
+          label: '上海',
+          value: 1
+        },
+        {
+          label: '广州',
+          value: 2
+        },
+        {
+          label: '天津',
+          value: 3
+        },
+        {
+          label: '武汉',
+          value: 4
+        },
+        {
+          label: '重庆',
+          value: 5
+        },
+      ]
+    }
+  }
 }
 </script>
 
