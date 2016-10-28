@@ -23,5 +23,31 @@
   ],
   "getUser": {
     "username": "yudonggong"
+  },
+  "getPrice": {
+    "amount": 789
+  },
+  "matchData" :{
+    "matchs": [
+      [
+        {
+          "name": "teamA"
+        },
+        {
+          "name": "teamB"
+        }
+      ],
+      [
+        {
+          "name": "teamC"
+        },
+        {
+          "name": "teamD"
+        }
+      ]
+    ],
+    "results": [
+      
+    ]
   }
 }

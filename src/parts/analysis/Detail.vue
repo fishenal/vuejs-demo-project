@@ -10,7 +10,7 @@
                   购买数量：
               </div>
               <div class="sales-board-line-right">
-                <v-counter></v-counter>
+                <v-counter @on-change="onParamsChange('buyNumber', $event)" :min="buyNumMin" :max="buyNumMax"></v-counter>
               </div>
           </div>
           <div class="sales-board-line">
@@ -18,7 +18,7 @@
                   产品类型：
               </div>
               <div class="sales-board-line-right">
-                  <v-selection :selections="buyTypes" @on-change="onParamChange('buyType')"></v-selection>
+                  <v-selection :selections="buyTypes" @on-change="onParamsChange('buyType', $event)"></v-selection>
               </div>
           </div>
           <div class="sales-board-line">
@@ -26,7 +26,7 @@
                   有效时间：
               </div>
               <div class="sales-board-line-right">
-                  <v-chooser :selections="periodList"></v-chooser>
+                  <v-chooser :selections="periodList" @on-change="onParamsChange('period', $event)"></v-chooser>
               </div>
           </div>
           <div class="sales-board-line">
@@ -34,7 +34,7 @@
                   产品版本：
               </div>
               <div class="sales-board-line-right">
-                  <v-mul-chooser :selections="versionList"></v-mul-chooser>
+                  <v-mul-chooser :selections="versionList" @on-change="onParamsChange('versions', $event)"></v-mul-chooser>
               </div>
           </div>
           <div class="sales-board-line">
@@ -42,13 +42,13 @@
                   总价：
               </div>
               <div class="sales-board-line-right">
-                  500 元
+                  {{ price }} 元
               </div>
           </div>
           <div class="sales-board-line">
               <div class="sales-board-line-left">&nbsp;</div>
               <div class="sales-board-line-right">
-                  <div class="button">
+                  <div class="button" @click="showBuyDialog">
                     立即购买
                   </div>
               </div>
@@ -76,6 +76,27 @@
           <li>用户所在地理区域分布状况等</li>
         </ul>
       </div>
+      <this-dialog :is-show="isShowBuyDialog" @on-close="hideBuyDialog">
+        <table>
+          <tr>
+            <th>购买数量</th>
+            <th>产品类型</th>
+            <th>有效时间</th>
+            <th>产品版本</th>
+            <th>总价</th>
+          </tr>
+          <tr>
+            <td>{{ buyNumber }}</td>
+            <td>{{ buyType.label }}</td>
+            <td>{{ period.label }}</td>
+            <td>
+              <span v-for="item in versions">{{ item.label }}</span>
+            </td>
+            <td>{{ price }}</td>
+          </tr>
+        </table>
+        <bank-chooser></bank-chooser>
+      </this-dialog>
   </div>
 </template>
 
@@ -84,18 +105,28 @@ import VSelection from '../../components/selection'
 import VCounter from '../../components/counter'
 import VChooser from '../../components/chooser'
 import VMulChooser from '../../components/multiply-chooser'
+import _ from 'lodash'
+import ThisDialog from '../../components/Dialog'
+import BankChooser from '../../components/bank-chooser'
 export default {
   components: {
     VSelection,
     VCounter,
     VChooser,
-    VMulChooser
+    VMulChooser,
+    ThisDialog,
+    BankChooser
   },
   data () {
     return {
-      buyParams: {
-
-      },
+      buyNumMin: 1,
+      buyNumMax: 12,
+      price: 0,
+      isShowBuyDialog: false,
+      buyNumber: null,
+      buyType: {},
+      period: {},
+      versions: [],
       versionList: [
         {
           label: '客户版',
@@ -141,9 +172,39 @@ export default {
     }
   },
   methods: {
-    onParamChange () {
-      
+    onParamsChange (key, pasItem) {
+      this[key] = pasItem
+      this.getPrice()
+    },
+    getPrice () {
+      let buyVersionsArray = _.map(this.versions, (item) => {
+        return item.value
+      })
+      let passParams = {
+        buyNumber: this.buyNumber,
+        buyType: this.buyType.value,
+        period: this.period.value,
+        version: buyVersionsArray.join(',')
+      }
+      this.$http.post('/api/getPrice', passParams).then((res) => {
+        let data = JSON.parse(res.data)
+        this.price = data.amount
+      })
+    },
+    hideBuyDialog () {
+      this.isShowBuyDialog = false
+    },
+    showBuyDialog () {
+      this.isShowBuyDialog = true
     }
+  },
+  mounted () {
+    // init price
+    this.buyNumber = this.buyNumMin,
+    this.buyType = this.buyTypes[0],
+    this.period = this.periodList[0],
+    this.versions = [this.versionList[0]]
+    this.getPrice()
   }
 }
 </script>
