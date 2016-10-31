@@ -77,7 +77,7 @@
         </ul>
       </div>
       <this-dialog :is-show="isShowBuyDialog" @on-close="hideBuyDialog">
-        <table>
+        <table class="buy-dialog-table">
           <tr>
             <th>购买数量</th>
             <th>产品类型</th>
@@ -95,7 +95,11 @@
             <td>{{ price }}</td>
           </tr>
         </table>
-        <bank-chooser></bank-chooser>
+        <h3 class="buy-dialog-title">请选择银行</h3>
+        <bank-chooser @on-change="getBankId"></bank-chooser>
+        <div class="button buy-dialog-btn" @click="confirmBuy">
+          确认购买
+        </div>
       </this-dialog>
   </div>
 </template>
@@ -127,6 +131,8 @@ export default {
       buyType: {},
       period: {},
       versions: [],
+      bankId: null,
+      orderId: null,
       versionList: [
         {
           label: '客户版',
@@ -176,6 +182,9 @@ export default {
       this[key] = pasItem
       this.getPrice()
     },
+    getBankId (bankObj) {
+      this.bankId = bankObj.id
+    },
     getPrice () {
       let buyVersionsArray = _.map(this.versions, (item) => {
         return item.value
@@ -196,6 +205,21 @@ export default {
     },
     showBuyDialog () {
       this.isShowBuyDialog = true
+    },
+    comfirmBuy () {
+      let buyVersionsArray = _.map(this.versions, (item) => {
+        return item.value
+      })
+      let passParams = {
+        buyNumber: this.buyNumber,
+        buyType: this.buyType.value,
+        period: this.period.value,
+        version: buyVersionsArray.join(',')
+      }
+      this.$http.post('/api/createOrder', passParams)
+      .then((res) => {
+        this.orderId = data.orderId
+      })
     }
   },
   mounted () {
@@ -211,5 +235,26 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.buy-dialog-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.buy-dialog-btn {
+  margin-top: 20px;
+}
+.buy-dialog-table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.buy-dialog-table td,
+.buy-dialog-table th{
+  border: 1px solid #e3e3e3;
+  text-align: center;
+  padding: 5px 0;
+}
+.buy-dialog-table th {
+  background: #4fc08d;
+  color: #fff;
+  border: 1px solid #4fc08d;
+}
 </style>

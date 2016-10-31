@@ -6,7 +6,7 @@
           @click="chosenSelection(index)"
           :title="item.label"
           :class="[item.name, {active: index === nowIndex}]"
-          >{{ item.label }}</li>
+          ></li>
         </ul>
       </div>
     </div>
@@ -14,15 +14,6 @@
 
 <script>
 export default {
-  props: {
-    selections: {
-      type: Array,
-      default: [{
-        label: 'test',
-        value: 0
-      }]
-    }
-  },
   data () {
     return {
       nowIndex: 0,
@@ -73,8 +64,11 @@ export default {
   methods: {
     chosenSelection (index) {
       this.nowIndex = index
-      this.$emit('on-change', this.selections[index])
+      this.$emit('on-change', this.banks[index])
     }
+  },
+  mounted () {
+    this.$emit('on-change', this.banks[0])
   }
 }
 </script>
@@ -85,9 +79,7 @@ export default {
   display: inline-block;
 }
 .chooser-list li.active {
-  border-color: #4fc08d;
-  background: #4fc08d;
-  color: #fff;
+  border: 1px solid #4fc08d;
 }
 
 .chooser-list li { 
@@ -96,6 +88,9 @@ export default {
     height: 32px;
     background-image: url(../assets/banks/banks.png);
     background-repeat: no-repeat;
+    margin: 5px;
+    border: 1px solid #e3e3e3;
+    cursor: pointer;
 }
 .zhaoshang {
     background-position: -2160px 0;
