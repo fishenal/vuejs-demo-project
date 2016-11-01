@@ -101,6 +101,7 @@
           确认购买
         </div>
       </this-dialog>
+      <check-buy :is-show-check-dialog="isShowCheckDialog"></check-buy>
   </div>
 </template>
 
@@ -112,6 +113,7 @@ import VMulChooser from '../../components/multiply-chooser'
 import _ from 'lodash'
 import ThisDialog from '../../components/Dialog'
 import BankChooser from '../../components/bank-chooser'
+import CheckBuy from '../../components/check-buy'
 export default {
   components: {
     VSelection,
@@ -119,7 +121,8 @@ export default {
     VChooser,
     VMulChooser,
     ThisDialog,
-    BankChooser
+    BankChooser,
+    CheckBuy
   },
   data () {
     return {
@@ -133,6 +136,7 @@ export default {
       versions: [],
       bankId: null,
       orderId: null,
+      isShowCheckDialog: false,
       versionList: [
         {
           label: '客户版',
@@ -206,7 +210,7 @@ export default {
     showBuyDialog () {
       this.isShowBuyDialog = true
     },
-    comfirmBuy () {
+    confirmBuy () {
       let buyVersionsArray = _.map(this.versions, (item) => {
         return item.value
       })
@@ -219,6 +223,7 @@ export default {
       this.$http.post('/api/createOrder', passParams)
       .then((res) => {
         this.orderId = data.orderId
+        this.isShowCheckDialog = true
       })
     }
   },
