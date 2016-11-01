@@ -101,7 +101,10 @@
           确认购买
         </div>
       </this-dialog>
-      <check-buy :is-show-check-dialog="isShowCheckDialog"></check-buy>
+      <this-dialog :is-show="isShowErrDialog" @on-close="hideErrDialog">
+        支付失败！
+      </this-dialog>
+      <check-buy :is-show-check-dialog="isShowCheckDialog" :order-id="orderId" @close-check-buy="hideCheckDialog"></check-buy>
   </div>
 </template>
 
@@ -137,6 +140,7 @@ export default {
       bankId: null,
       orderId: null,
       isShowCheckDialog: false,
+      isShowErrDialog: false,
       versionList: [
         {
           label: '客户版',
@@ -210,6 +214,12 @@ export default {
     showBuyDialog () {
       this.isShowBuyDialog = true
     },
+    hideErrDialog () {
+      this.isShowErrDialog = false
+    },
+    hideCheckDialog () {
+      this.isShowCheckDialog = false
+    },
     confirmBuy () {
       let buyVersionsArray = _.map(this.versions, (item) => {
         return item.value
@@ -222,8 +232,12 @@ export default {
       }
       this.$http.post('/api/createOrder', passParams)
       .then((res) => {
-        this.orderId = data.orderId
+        this.orderId = res.data.orderId
+        this.isShowBuyDialog = false
         this.isShowCheckDialog = true
+      }, (err) => {
+        this.isShowBuyDialog = false
+        this.isShowErrDialog = true
       })
     }
   },

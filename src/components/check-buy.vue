@@ -1,6 +1,6 @@
 <template>
     <div>
-      <this-dialog :is-if="isShowCheckDialog">
+      <this-dialog :is-show="isShowCheckDialog" @on-close="checkStatus">
         请检查你的支付状态！
         <div class="button" @click="checkStatus">
           支付成功
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ThisDialog from 'Dialog'
+import ThisDialog from './Dialog'
 export default {
   components: {
     ThisDialog
@@ -28,6 +28,9 @@ export default {
     'isShowCheckDialog': {
       type: Boolean,
       default: true
+    },
+    'orderId': {
+      type: String
     }
   },
   data () {
@@ -38,7 +41,16 @@ export default {
   },
   methods: {
     checkStatus () {
-
+      this.$http.post('/api/checkOrderStatus', {
+        orderId: this.orderId
+      })
+      .then((res) => {
+        this.$emit('close-check-buy')
+        this.isShowSuccessDialog = true
+      }, (err) => {
+        this.$emit('close-check-buy')
+        this.isShowFailDialog = true
+      })
     }
   }
 }
