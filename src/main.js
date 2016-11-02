@@ -8,6 +8,7 @@ import ForecastDetail from './parts/forecast/Detail'
 import PublishDetail from './parts/publish/Detail'
 import indexPage from './page/Index.vue'
 import detailPage from './page/Detail.vue'
+import orderPage from './page/order.vue'
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
@@ -21,6 +22,10 @@ let router = new VueRouter({
 	{
 		path: '/index',
 		component: indexPage
+	},
+	{
+		path: '/order',
+		component: orderPage
 	},
 	{
 		path: '/detail',

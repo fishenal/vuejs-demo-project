@@ -56,6 +56,7 @@ export default {
   height: 25px;
   line-height: 25px;
   border-radius: 3px;
+  background: #fff;
 }
 .selection-show .arrow {
   display: inline-block;
