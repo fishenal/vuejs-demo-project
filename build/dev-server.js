@@ -1,11 +1,11 @@
+var config = require('../config')
+if (!process.env.NODE_ENV) process.env.NODE_ENV = config.dev.env
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var config = require('../config')
+var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
-var webpackConfig = process.env.NODE_ENV === 'testing'
-  ? require('./webpack.prod.conf')
-  : require('./webpack.dev.conf')
+var webpackConfig = require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -15,6 +15,7 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 var compiler = webpack(webpackConfig)
+
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   stats: {
@@ -55,16 +56,12 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-// var jsonServer = require('json-server')
 var apiServer = express()
 var bodyParser = require('body-parser')
 apiServer.use(bodyParser.urlencoded({ extended: true }))
 apiServer.use(bodyParser.json())
 var apiRouter = express.Router()
 var fs = require('fs')
-apiRouter.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
-});
 apiRouter.route('/:apiName')
 .all(function (req, res) {
   fs.readFile('./db.json', 'utf8', function (err, data) {
@@ -82,11 +79,6 @@ apiRouter.route('/:apiName')
 
 
 apiServer.use('/api', apiRouter);
-// var apiRouter = jsonServer.router('db.json')
-// var apiMiddlewares = jsonServer.defaults()
- 
-// apiServer.use(apiMiddlewares)
-// apiServer.use('/api', apiRouter)
 apiServer.listen(port + 1, function (err) {
   if (err) {
     console.log(err)
@@ -100,5 +92,7 @@ module.exports = app.listen(port, function (err) {
     console.log(err)
     return
   }
-  console.log('Listening at http://localhost:' + port + '\n')
+  var uri = 'http://localhost:' + port
+  console.log('Listening at ' + uri + '\n')
+  opn(uri)
 })

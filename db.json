@@ -1,56 +1,34 @@
 {
-  "getBoardList": [
+  "getNewsList": [
     {
-      "title": "开放产品",
-      "description": "开放产品是一款开放产品",
-      "saleout": false
+      "id": 1,
+      "title": "新闻条目1新闻条目1新闻条目1新闻条目1",
+      "url": "http://starcraft.com"
     },
     {
-      "title": "品牌营销",
-      "description": "品牌营销帮助你的产品更好地找到定位",
-      "saleout": false
+      "id": 2,
+      "title": "新闻条目2新闻条目2新闻条目2新闻条目2",
+      "url": "http://warcraft.com"
     },
     {
-      "title": "使命必达",
-      "description": "使命必达快速迭代永远保持最前端的速度",
-      "saleout": true
+      "id": 3,
+      "title": "新闻条3新闻条3新闻条3",
+      "url": "http://overwatch.com"
     },
     {
-      "title": "勇攀高峰",
-      "description": "帮你勇闯高峰，到达事业的顶峰",
-      "saleout": false
+      "id": 4,
+      "title": "新闻条4广告发布",
+      "url": "http://hearstone.com"
     }
   ],
-  "getUser": {
-    "username": "yudonggong"
+  "login": {
+    "username": "yudongdong",
+    "userId": 123123
   },
   "getPrice": {
-    "amount": 789
+    "amount": 678
   },
   "createOrder": {
-    "orderId": "xd123123"
-  },
-  "matchData" :{
-    "matchs": [
-      [
-        {
-          "name": "teamA"
-        },
-        {
-          "name": "teamB"
-        }
-      ],
-      [
-        {
-          "name": "teamC"
-        },
-        {
-          "name": "teamD"
-        }
-      ]
-    ],
-    "results": [
-      
-    ]
+    "orderId": "6djk979"
   }
 }

@@ -1,60 +1,56 @@
 import Vue from 'vue'
-import App from './App'
+import Layout from './components/layout'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import CountDetail from './parts/count/Detail'
-import AnalysisDetail from './parts/analysis/Detail'
-import ForecastDetail from './parts/forecast/Detail'
-import PublishDetail from './parts/publish/Detail'
-import indexPage from './page/Index.vue'
-import detailPage from './page/Detail.vue'
-import orderPage from './page/order.vue'
+import IndexPage from './pages/index'
+import DetailPage from './pages/detail'
+import OrderListPage from './pages/orderList'
+import DetailAnaPage from './pages/detail/analysis'
+import DetailCouPage from './pages/detail/count'
+import DetailForPage from './pages/detail/forecast'
+import DetailPubPage from './pages/detail/publish'
 Vue.use(VueRouter)
 Vue.use(VueResource)
-
 let router = new VueRouter({
 	mode: 'history',
 	routes: [
-	{
-		path: '/',
-		component: indexPage
-	},
-	{
-		path: '/index',
-		component: indexPage
-	},
-	{
-		path: '/order',
-		component: orderPage
-	},
-	{
-		path: '/detail',
-		redirect: '/detail/count',
-		component: detailPage,
-		children: [
-			{
-				path: 'count',
-				component: CountDetail
-			},
-			{
-				path: 'analysis',
-				component: AnalysisDetail
-			},
-			{
-				path: 'forecast',
-				component: ForecastDetail
-			},
-			{
-				path: 'publish',
-				component: PublishDetail
-			}
-		]
-	}
+		{
+			path: '/',
+			component: IndexPage
+		},
+		{
+			path: '/orderList',
+			component: OrderListPage
+		},
+		{
+			path: '/detail',
+			component: DetailPage,
+			redirect: '/detail/analysis',
+			children: [
+				{
+					path: 'analysis',
+					component: DetailAnaPage
+				},
+				{
+					path: 'count',
+					component: DetailCouPage
+				},
+				{
+					path: 'forecast',
+					component: DetailForPage
+				},
+				{
+					path: 'publish',
+					component: DetailPubPage
+				}
+			]
+		}
 	]
 })
-
-const app = new Vue({
-	el: '#app',
-	router,
-	render: h => h(App)
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  template: '<Layout/>',
+  components: { Layout }
 })
