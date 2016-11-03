@@ -172,7 +172,6 @@
                 this.update();
             },
             show () {
-                console.log(123)
                 this.update();
             }
         },
@@ -234,6 +233,7 @@
                 this.show = false;
                 this.now = new Date(this.date[index].time);
                 this.showValue = this.stringify();
+                this.$emit('on-change', this.showValue);
             },
             parse (str) {
                 var time = new Date(str);
