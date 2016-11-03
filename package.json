@@ -1,21 +1,18 @@
 {
-  "name": "vuedemo3",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
+  "name": "vue-demo-sale-platform",
+  "version": "2.0.0",
+  "description": "a demo sale platform use vue2.0",
   "author": "fishenal <yu_dong_han@hotmail.com>",
-  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
   },
+  "repository": "https://github.com/fishenal/Vuejs-SalePlatform",
   "dependencies": {
-    "json-server": "^0.8.22",
     "lodash": "^4.16.4",
     "vue": "^2.0.1",
-    "vue-date-picker": "^1.0.2",
     "vue-resource": "^1.0.3",
-    "vue-router": "^2.0.1",
-    "vuex": "^2.0.0"
+    "vue-router": "^2.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
@@ -45,5 +42,9 @@
     "webpack-dev-middleware": "^1.8.3",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
   }
 }
