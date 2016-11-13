@@ -22,6 +22,7 @@
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
     "babel-register": "^6.0.0",
+    "body-parser": "^1.15.2",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.25.0",
     "eventsource-polyfill": "^0.9.6",
