@@ -118,7 +118,7 @@ import VCounter from '../../components/base/counter'
 import VChooser from '../../components/base/chooser'
 import VMulChooser from '../../components/base/multiplyChooser'
 import Dialog from '../../components/base/dialog'
-import BankChooser from '../../components/BankChooser'
+import BankChooser from '../../components/bankChooser'
 import CheckOrder from '../../components/checkOrder'
 import _ from 'lodash'
 export default {
