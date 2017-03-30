@@ -6,6 +6,10 @@
         选择产品：
         <v-selection :selections="products" @on-change="productChange"></v-selection>
       </div>
+      <div class="order-list-option">
+        选择产品2：
+        <v-selection :selections="products" @on-change="productChange"></v-selection>
+      </div>
 
       <div class="order-list-option">
         开始日期：

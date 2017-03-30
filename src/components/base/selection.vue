@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { eventBus } from '../../eventBus'
 export default {
   props: {
     selections: {
@@ -29,13 +30,20 @@ export default {
       nowIndex: 0
     }
   },
+  mounted () {
+    eventBus.$on('reset-status', () => {
+      this.isDrop = false
+    })
+  },
   methods: {
-    toggleDrop () {
+    toggleDrop (event) {
+      event.stopPropagation()
+      eventBus.$emit('reset-status')
       this.isDrop = !this.isDrop
     },
     chooseSelection (index) {
       this.nowIndex = index
-      this.isDrop = false
+      // this.isDrop = false
       this.$emit('on-change', this.selections[this.nowIndex])
     }
   }
