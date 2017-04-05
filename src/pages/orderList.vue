@@ -35,18 +35,35 @@
           <td v-for="head in tableHeads">{{ item[head.key] }}</td>
         </tr>
       </table>
+      <div class="table-pagenation">
+        <v-pagenation :total="total" :pageSize="pageSize" @on-change="pageChange"></v-pagenation>  
+      </div>
     </div>
   </div>
 </template>
+<!-- 1. 添加数据和数据分页 offset，pagesize, total-->
+<!-- 2. 分页组件 计算页码-->
+<!-- 3. 分页组件 自定义事件刷新列表-->
 
+<!-- 4. 较复杂的列表页，较多条件交互，使用vuex-->
+<!-- 5. 安装vuex -->
+<!-- 6. 搭建vuex store目录结构 -->
+<!-- 7. vuex里面的数据 state -->
+<!-- vuex getlist action 发送ajax请求 -->
+<!-- 8. vuex mutation update params-->
+<!-- 8. vuex getter -->
+<!-- 与页面的关联，action mutation getter -->
+<!-- 新增 computed total -->
 <script>
 import VSelection from '../components/base/selection'
 import VDatePicker from '../components/base/datepicker'
+import VPagenation from '../components/base/pagenation'
 import _ from 'lodash'
 export default {
   components: {
     VSelection,
-    VDatePicker
+    VDatePicker,
+    VPagenation
   },
   data () {
     return {
@@ -102,59 +119,91 @@ export default {
           key: 'amount'
         }
       ],
-      currentOrder: 'asc',
-      tableData: []
+      tableData: [],
+      pageSize: 10,
+      offset: 0,
+      
+    }
+  },
+  computed: {
+    tableData () {
+      return this.$store.getters.getOrderList
+    },
+    total () {
+      return this.$store.getters.getTotal
     }
   },
   watch: {
     query () {
-      this.getList()
+      this.$store.dispatch('refreshList')
     }
   },
   methods: {
     productChange (obj) {
-      this.productId = obj.value
-      this.getList()
+      // this.productId = obj.value
+      this.$store.commit('updateParams', {
+        key: 'productId',
+        val: obj.value
+      })
+      this.$store.dispatch('refreshList')
+      // this.getList()
     },
     getStartDate (date) {
-      this.startDate = date
-      this.getList()
+      this.$store.commit('updateParams', {
+        key: 'startDate',
+        val: date
+      })
+      this.$store.dispatch('refreshList')
     },
     getEndDate (date) {
       this.endDate = date
       this.getList()
     },
-    getList () {
-      let reqParams = {
-        query: this.query,
-        productId: this.productId,
-        startDate: this.startDate,
-        endDate: this.endDate
-      }
-      this.$http.post('/api/getOrderList', reqParams)
-      .then((res) => {
-        this.tableData = res.data.list
-      }, (err) => {
-
+    pageChange (offset) {
+      this.$store.commit('updateParams', {
+        key: 'offset',
+        val: offset * this.pageSize
       })
+      this.$store.dispatch('refreshList')
+      // this.offset = offset * this.pageSize
+      // this.getList()
     },
-    changeOrderType (headItem) {
-      this.tableHeads.map((item) => {
-        item.active = false
-        return item
-      })
-      headItem.active = true
-      if (this.currentOrder === 'asc') {
-        this.currentOrder = 'desc'
-      }
-      else if (this.currentOrder === 'desc') {
-        this.currentOrder = 'asc'
-      }
-      this.tableData = _.orderBy(this.tableData, headItem.key, this.currentOrder)
-    }
+    // getList () {
+    //   let reqParams = {
+    //     query: this.query,
+    //     productId: this.productId,
+    //     startDate: this.startDate,
+    //     endDate: this.endDate,
+    //     offset: this.offset,
+    //     pageSize: this.pageSize
+    //   }
+    //   this.$http.post('/api/getOrderList', reqParams)
+    //   .then((res) => {
+    //     this.tableData = res.data.list
+    //     this.total = res.data.total
+    //   }, (err) => {
+
+    //   })
+    // },
+    // changeOrderType (headItem) {
+    //   this.tableHeads.map((item) => {
+    //     item.active = false
+    //     return item
+    //   })
+    //   headItem.active = true
+    //   if (this.currentOrder === 'asc') {
+    //     this.currentOrder = 'desc'
+    //   }
+    //   else if (this.currentOrder === 'desc') {
+    //     this.currentOrder = 'asc'
+    //   }
+    //   this.tableData = _.orderBy(this.tableData, headItem.key, this.currentOrder)
+    // }
   },
   mounted () {
-    this.getList()
+    this.$store.dispatch('refreshList')
+    // this.getList()
+    // console.log(this.$store.state)
   }
 }
 </script>
@@ -206,5 +255,9 @@ export default {
 }
 .order-list-table th.active {
   background: #35495e;
+}
+.table-pagenation {
+  padding: 15px;
+  text-align: right;
 }
 </style>

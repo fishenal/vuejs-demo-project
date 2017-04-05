@@ -11,6 +11,9 @@ import DetailForPage from './pages/detail/forecast'
 import DetailPubPage from './pages/detail/publish'
 Vue.use(VueRouter)
 Vue.use(VueResource)
+
+import store from './store'
+
 let router = new VueRouter({
 	mode: 'history',
 	routes: [
@@ -51,6 +54,7 @@ let router = new VueRouter({
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<Layout/>',
   components: { Layout }
 })
